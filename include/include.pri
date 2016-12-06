@@ -6,5 +6,5 @@ HEADERS +=  $${PWD}/*.h \
             \
             $${PWD}/logger/*.h \
             \
-            $${PWD}/logger/target/*.h
+            $${PWD}/logger/def_target/*.h
 

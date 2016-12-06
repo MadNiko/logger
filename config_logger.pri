@@ -27,8 +27,7 @@ win* {
 }
 
 
-CONFIG *= qt c++11
+CONFIG *= c++11
 
-QT *= core
 
 INCLUDEPATH += $${PWD}/include
