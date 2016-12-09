@@ -62,7 +62,6 @@ const std::size_t level_str_max_length([]
 
 ostream::ostream(std_ostream& ostream)
     : m_state(state::idle)
-    , m_thread_id_str_max_lenght(6)
     , m_ostream(ostream)
 { }
 
@@ -125,7 +124,7 @@ void ostream::stop()
 void ostream::system(string&& message)
 {
     std_string header;
-    header.reserve(50);
+    header.reserve(42);
 
     this->append_head(header);
     this->append_level_system(header);
@@ -141,7 +140,7 @@ void ostream::message(unsigned char scope_level, logger::level log_level, const 
     const std::size_t spaces_length(scope_level * visit_str_length);
 
     std_string header;
-    header.reserve(50 + spaces_length + full_key.length());
+    header.reserve(42 + spaces_length + full_key.length());
 
     this->append_head(header);
     this->append_level(header, log_level);
@@ -162,7 +161,7 @@ void ostream::function(unsigned char scope_level, logger::level log_level, logge
     const std::size_t spaces_length(scope_level * visit_str_length);
 
     std_string header;
-    header.reserve(50 + spaces_length + helper::chart<logger::chr>::length_str(func_name));
+    header.reserve(42 + spaces_length + helper::chart<logger::chr>::length_str(func_name));
 
     this->append_head(header);
     this->append_level(header, log_level);
@@ -187,36 +186,20 @@ void ostream::append_head(std_string& str)
     const std::time_t t(std::time(nullptr));
     const std::tm tm(*std::localtime(&t));
 
-    std_string thread_id_str(helper::chart<logger::chr>::number_to_string(std::this_thread::get_id().hash()));
-    const std::size_t thread_id_str_length(thread_id_str.length());
-
-    std::size_t tmp_lenght(0);
-    do tmp_lenght = m_thread_id_str_max_lenght;
-    while (tmp_lenght != m_thread_id_str_max_lenght);
-
-    if (thread_id_str_length <= tmp_lenght)
-        tmp_lenght -= thread_id_str_length;
-    else
-    {
-        tmp_lenght = 0;
-        m_thread_id_str_max_lenght = thread_id_str_length;
-    }
-
     str += LOGGER_CHAR('[');
-    str += helper::chart<logger::chr>::number_to_string(tm.tm_year % 100);
+    str += helper::chart<logger::chr>::num_to_dec(tm.tm_year % 100, 2);
     str += LOGGER_CHAR('.');
-    str += helper::chart<logger::chr>::number_to_string(tm.tm_mon + 1);
+    str += helper::chart<logger::chr>::num_to_dec(tm.tm_mon + 1, 2);
     str += LOGGER_CHAR('.');
-    str += helper::chart<logger::chr>::number_to_string(tm.tm_mday);
+    str += helper::chart<logger::chr>::num_to_dec(tm.tm_mday, 2);
     str += LOGGER_STR("] [");
-    str += helper::chart<logger::chr>::number_to_string(tm.tm_hour);
+    str += helper::chart<logger::chr>::num_to_dec(tm.tm_hour, 2);
     str += LOGGER_CHAR(':');
-    str += helper::chart<logger::chr>::number_to_string(tm.tm_min);
+    str += helper::chart<logger::chr>::num_to_dec(tm.tm_min, 2);
     str += LOGGER_CHAR(':');
-    str += helper::chart<logger::chr>::number_to_string(tm.tm_sec % 60);
+    str += helper::chart<logger::chr>::num_to_dec(tm.tm_sec % 60, 2);
     str += LOGGER_STR("] [");
-    if (tmp_lenght > 0) str.append(tmp_lenght, LOGGER_CHAR('0'));
-    str += std::move(thread_id_str);
+    str += helper::chart<logger::chr>::num_to_hex(std::this_thread::get_id().hash());
     str += LOGGER_STR("] ");
 }
 
@@ -227,19 +210,18 @@ void ostream::append_level(std_string& str, logger::level level) const
 
     str += LOGGER_CHAR('[');
     str += level_str;
+    str += LOGGER_STR("] ");
     if (level_str_length < level_str_max_length)
         str.append((level_str_max_length - level_str_length), LOGGER_CHAR(' '));
-    str += LOGGER_STR("] ");
 }
 
 void ostream::append_level_system(std_string& str) const
 {
     str += LOGGER_CHAR('[');
     str += level_system_str;
+    str += LOGGER_STR("] ");
     if (level_system_str_length < level_str_max_length)
         str.append((level_str_max_length - level_system_str_length), LOGGER_CHAR(' '));
-
-    str += LOGGER_STR("] ");
 }
 
 void ostream::print(std_string&& header, string&& message)

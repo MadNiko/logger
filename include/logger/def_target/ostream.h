@@ -98,7 +98,6 @@ private:
 private:
 
     state m_state;
-    std::size_t m_thread_id_str_max_lenght;
     std_ostream& m_ostream;
     std::mutex m_ostream_access;
 };

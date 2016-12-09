@@ -12,6 +12,7 @@ DEFINES += LOGGER_VERSION=$${LOGGER_VERSION}
 
 
 #CONFIG += logger_lib_static
+DEFINES += LOGGER_STL_STRING
 
 
 CONFIG(debug,debug|release) {
