@@ -123,29 +123,18 @@ void ostream::stop()
 
 void ostream::system(string&& message)
 {
-    std_string header;
-    header.reserve(42);
-
-    this->append_head(header);
-    this->append_level_system(header);
-
+    std_string header(this->make_header_string(level_system_str, 0));
     const std::size_t header_length(header.length());
 
     this->print(std::move(header), helper_string::add_tabs_to_begin_lines(std::move(message), header_length));
 }
 
-void ostream::message(unsigned char scope_level, logger::level log_level, const string& full_key, string&& message)
+void ostream::message(unsigned char scope_level, logger::level level, const string& full_key, string&& message)
 {
-    const std::size_t visit_str_length(4);
-    const std::size_t spaces_length(scope_level * visit_str_length);
+    const const_chrs level_str(logger::helper::level_to_string(level));
 
-    std_string header;
-    header.reserve(42 + spaces_length + full_key.length());
+    std_string header(this->make_header_string(level_str, scope_level));
 
-    this->append_head(header);
-    this->append_level(header, log_level);
-
-    header.append(spaces_length, LOGGER_CHAR(' '));
     header += LOGGER_CHAR('[');
     helper_string::append(header, full_key);
     header += LOGGER_CHAR("] ");
@@ -155,18 +144,11 @@ void ostream::message(unsigned char scope_level, logger::level log_level, const 
     this->print(std::move(header), helper_string::add_tabs_to_begin_lines(std::move(message), header_length));
 }
 
-void ostream::function(unsigned char scope_level, logger::level log_level, logger::visit visit, const_chrs func_name)
+void ostream::function(unsigned char scope_level, logger::level level, logger::visit visit, const_chrs func_name)
 {
-    const std::size_t visit_str_length(4);
-    const std::size_t spaces_length(scope_level * visit_str_length);
+    const const_chrs level_str(logger::helper::level_to_string(level));
 
-    std_string header;
-    header.reserve(42 + spaces_length + helper::chart<logger::chr>::length_str(func_name));
-
-    this->append_head(header);
-    this->append_level(header, log_level);
-
-    header.append(spaces_length, LOGGER_CHAR(' '));
+    std_string header(this->make_header_string(level_str, scope_level));
 
     switch (visit)
     {
@@ -181,47 +163,41 @@ void ostream::function(unsigned char scope_level, logger::level log_level, logge
     this->print(std::move(header), string());
 }
 
-void ostream::append_head(std_string& str)
+std_string ostream::make_header_string(const_chrs level_str, unsigned char scope_level)
 {
     const std::time_t t(std::time(nullptr));
     const std::tm tm(*std::localtime(&t));
 
-    str += LOGGER_CHAR('[');
-    str += helper::chart<logger::chr>::num_to_dec(tm.tm_year % 100, 2);
-    str += LOGGER_CHAR('.');
-    str += helper::chart<logger::chr>::num_to_dec(tm.tm_mon + 1, 2);
-    str += LOGGER_CHAR('.');
-    str += helper::chart<logger::chr>::num_to_dec(tm.tm_mday, 2);
-    str += LOGGER_STR("] [");
-    str += helper::chart<logger::chr>::num_to_dec(tm.tm_hour, 2);
-    str += LOGGER_CHAR(':');
-    str += helper::chart<logger::chr>::num_to_dec(tm.tm_min, 2);
-    str += LOGGER_CHAR(':');
-    str += helper::chart<logger::chr>::num_to_dec(tm.tm_sec % 60, 2);
-    str += LOGGER_STR("] [");
-    str += helper::chart<logger::chr>::num_to_hex(std::this_thread::get_id().hash());
-    str += LOGGER_STR("] ");
-}
+    const std::size_t visit_str_length(4);
+    const std::size_t thread_id_str_length(2*sizeof(std::size_t));
 
-void ostream::append_level(std_string& str, logger::level level) const
-{
-    std::size_t level_str_length(0);
-    const_chrs level_str(helper::level_to_string(level, &level_str_length));
+    std_string result(28 + thread_id_str_length + level_str_max_length + (scope_level * visit_str_length), LOGGER_CHAR(' '));
 
-    str += LOGGER_CHAR('[');
-    str += level_str;
-    str += LOGGER_STR("] ");
-    if (level_str_length < level_str_max_length)
-        str.append((level_str_max_length - level_str_length), LOGGER_CHAR(' '));
-}
+#if defined(LOGGER_CHAR__CHAR)
+#if defined(LOGGER_CC_MSVC) && LOGGER_CC_MSVC < 1900
+    int pos_null(std::sprintf(&result.front(),
+#else
+    int pos_null(std::snprintf(&result.front(), result.length(),
+#endif // defined(LOGGER_CC_MSVC) && LOGGER_CC_MSVC < 1900
+#else // defined(LOGGER_CHAR__WIDE_CHAR)
+    int pos_null(std::swprintf(&result.front(), result.length(),
+#endif
+        LOGGER_STR("[%.2d.%.2d.%.2d] [%.2d:%.2d:%.2d] [%.*X] [%s]"),
+        tm.tm_year % 100,
+        tm.tm_mon + 1,
+        tm.tm_mday,
+        tm.tm_hour,
+        tm.tm_min,
+        tm.tm_sec % 60,
+        thread_id_str_length, std::this_thread::get_id().hash(),
+        level_str));
 
-void ostream::append_level_system(std_string& str) const
-{
-    str += LOGGER_CHAR('[');
-    str += level_system_str;
-    str += LOGGER_STR("] ");
-    if (level_system_str_length < level_str_max_length)
-        str.append((level_str_max_length - level_system_str_length), LOGGER_CHAR(' '));
+    if (0 < pos_null && static_cast<std::size_t>(pos_null) < result.length())
+        result[pos_null] = LOGGER_CHAR(' ');
+    else
+        result.clear();
+
+    return result;
 }
 
 void ostream::print(std_string&& header, string&& message)
