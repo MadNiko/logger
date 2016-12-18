@@ -75,23 +75,18 @@ public:
      * @param level
      * @param message
      */
-    virtual void message(unsigned char scope_level, logger::level log_level, const string& full_key, string&& message) override;
+    virtual void message(unsigned char scope_level, logger::level level, const string& full_key, string&& message) override;
 
     /** @brief
      * @param tab
      * @param visit
      * @param funcName
      */
-    virtual void function(unsigned char scope_level, logger::level log_level, logger::visit visit, const_chrs func_name) override;
-
-protected:
-
-    void append_head(std_string& str);
-
-    void append_level(std_string& str, logger::level level) const;
-    void append_level_system(std_string& str) const;
+    virtual void function(unsigned char scope_level, logger::level level, logger::visit visit, const_chrs func_name) override;
 
 private:
+
+    std_string make_header_string(const_chrs level_str, unsigned char scope_level);
 
     void print(std_string&& header, string&& message);
 
