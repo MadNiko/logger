@@ -18,6 +18,21 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\src\function_visiter.cpp" />
+    <ClCompile Include="..\..\..\src\helper.cpp" />
+    <ClCompile Include="..\..\..\src\helper_data.cpp" />
+    <ClCompile Include="..\..\..\src\helper_string_qt.cpp" />
+    <ClCompile Include="..\..\..\src\helper_string_stl.cpp" />
+    <ClCompile Include="..\..\..\src\manager.cpp" />
+    <ClCompile Include="..\..\..\src\node.cpp" />
+    <ClCompile Include="..\..\..\src\ostream.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\src\helper_data.h" />
+    <ClInclude Include="..\..\..\src\helper_string.h" />
+    <ClInclude Include="..\..\..\src\node_data.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E8FA6FCF-D294-43EF-AD76-C6E3DCD445A1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -55,40 +70,44 @@
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="logger_config.props" />
-    <Import Project="logger_include.props" />
-    <Import Project="logger_src.props" />
+    <Import Project="logger_build.props" />
+    <Import Project="$(ProjectDir)logger_config.props" />
+    <Import Project="$(ProjectDir)logger_include.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="logger_config.props" />
-    <Import Project="logger_include.props" />
-    <Import Project="logger_src.props" />
+    <Import Project="logger_build.props" />
+    <Import Project="$(ProjectDir)logger_config.props" />
+    <Import Project="$(ProjectDir)logger_include.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="logger_config.props" />
-    <Import Project="logger_include.props" />
-    <Import Project="logger_src.props" />
+    <Import Project="logger_build.props" />
+    <Import Project="$(ProjectDir)logger_config.props" />
+    <Import Project="$(ProjectDir)logger_include.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    <Import Project="logger_config.props" />
-    <Import Project="logger_include.props" />
-    <Import Project="logger_src.props" />
+    <Import Project="logger_build.props" />
+    <Import Project="$(ProjectDir)logger_config.props" />
+    <Import Project="$(ProjectDir)logger_include.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <TargetName>$(LoggerTargetName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <TargetName>$(LoggerTargetName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>$(LoggerTargetName)</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>$(LoggerTargetName)</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -150,8 +169,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

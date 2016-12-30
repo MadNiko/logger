@@ -3,6 +3,21 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
-  <ItemDefinitionGroup />
-  <ItemGroup />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(LoggerIncludeDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="$(LoggerIncludeDir)logger\constants.h" />
+    <ClInclude Include="$(LoggerIncludeDir)logger\defines.h" />
+    <ClInclude Include="$(LoggerIncludeDir)logger\function_visiter.h" />
+    <ClInclude Include="$(LoggerIncludeDir)logger\helper.h" />
+    <ClInclude Include="$(LoggerIncludeDir)logger\manager.h" />
+    <ClInclude Include="$(LoggerIncludeDir)logger\node.h" />
+    <ClInclude Include="$(LoggerIncludeDir)logger\string.h" />
+    <ClInclude Include="$(LoggerIncludeDir)logger\target.h" />
+    <ClInclude Include="$(LoggerIncludeDir)logger\types.h" />
+    <ClInclude Include="$(LoggerIncludeDir)logger\def_target\ostream.h" />
+  </ItemGroup>
 </Project>
