@@ -35,3 +35,4 @@ Makefile*
 lib/
 *.sdf
 *.opensdf
+/project/msvc/.vs/logger/v15

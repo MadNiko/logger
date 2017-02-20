@@ -40,7 +40,7 @@ public:
     /** @brief Конструктор копирования.
      * @param other - другой объект логера.
      */
-    node(const node& other);
+    node(const node& other) LOGGER_NOEXCEPT;
 
     /** @brief Деструктор. */
     ~node();

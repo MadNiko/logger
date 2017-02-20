@@ -169,7 +169,7 @@ std_string ostream::make_header_string(const_chrs level_str, unsigned char scope
     const std::tm tm(*std::localtime(&t));
 
     const std::size_t visit_str_length(4);
-    const std::size_t thread_id_str_length(2*sizeof(std::size_t));
+    const unsigned int thread_id_str_length(2*sizeof(std::size_t));
 
     std_string result(28 + thread_id_str_length + level_str_max_length + (scope_level * visit_str_length), LOGGER_CHAR(' '));
 
@@ -189,7 +189,7 @@ std_string ostream::make_header_string(const_chrs level_str, unsigned char scope
         tm.tm_hour,
         tm.tm_min,
         tm.tm_sec % 60,
-        thread_id_str_length, std::this_thread::get_id().hash(),
+        thread_id_str_length, static_cast<unsigned int>(std::hash<std::thread::id>()(std::this_thread::get_id())),
         level_str));
 
     if (0 < pos_null && static_cast<std::size_t>(pos_null) < result.length())

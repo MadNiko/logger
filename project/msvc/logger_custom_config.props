@@ -13,9 +13,8 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
+      <AdditionalOptions>/std:c++17</AdditionalOptions>
       <PreprocessorDefinitions>LOGGER_STL_STRING;LOGGER_CHAR__CHAR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <UndefinePreprocessorDefinitions>LOGGER_CHAR__WIDE_CHAR;%(UndefinePreprocessorDefinitions)</UndefinePreprocessorDefinitions>
-      <!--<AdditionalOptions>/IGNORE:9025%(AdditionalOptions)</AdditionalOptions>-->
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />

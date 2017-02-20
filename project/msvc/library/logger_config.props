@@ -17,7 +17,7 @@
     <LoggerOutputDir>$(LoggerProjectDir)..\..\..\..\$(SolutionName)-output-$(Configuration)-$(Platform)\</LoggerOutputDir>
     <LoggerLibDir>$(LoggerOutputDir)lib\</LoggerLibDir>
     <LoggerBinDir>$(LoggerOutputDir)bin\</LoggerBinDir>
-    <LoggerBuildDir>$(LoggerOutputDir)build\</LoggerBuildDir>
+    <LoggerBuildDir>$(LoggerOutputDir)build_$(LoggerName)\</LoggerBuildDir>
     <LoggerTargetName>$(LoggerName)$(LoggerTargetNameSuffix)</LoggerTargetName>
     <LoggerConfigurationType>DynamicLibrary</LoggerConfigurationType>
     <!-- StaticLibrary | DynamicLibrary -->
@@ -25,7 +25,7 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <PreprocessorDefinitions>LOGGER_STL_STRING;LOGGER_CHAR__WIDE_CHAR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <!--<PreprocessorDefinitions>LOGGER_STL_STRING;LOGGER_CHAR__WIDE_CHAR;%(PreprocessorDefinitions)</PreprocessorDefinitions>-->
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />
