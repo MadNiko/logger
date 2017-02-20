@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?> 
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ImportGroup Label="PropertySheets" />
+
+  <ImportGroup Label="PropertySheets">    
+    <Import Project="$(LoggerProjectDir)logger_config.props" Condition="'$(LoadedProps_LoggerConfig)'!='True'" />
+  </ImportGroup>
+
+  <PropertyGroup Label="UserMacros">
+    <LoadedProps_LoggerInclude>True</LoadedProps_LoggerInclude>
+  </PropertyGroup>
+
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup />
+  
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>$(LoggerIncludeDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
+  
   <ItemGroup>
     <ClInclude Include="$(LoggerIncludeDir)logger\constants.h" />
     <ClInclude Include="$(LoggerIncludeDir)logger\defines.h" />
@@ -20,4 +30,5 @@
     <ClInclude Include="$(LoggerIncludeDir)logger\types.h" />
     <ClInclude Include="$(LoggerIncludeDir)logger\def_target\ostream.h" />
   </ItemGroup>
+
 </Project>

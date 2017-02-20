@@ -95,7 +95,7 @@ void manager::running_app(string&& append_message)
 
 void manager::running_app(const_chrs append_message)
 {
-    this->running_app(helper_string::make(append_message));
+	this->running_app(helper_string::make(append_message ? append_message : LOGGER_STR("")));
 }
 
 void manager::quit_app(string&& append_message)
@@ -106,7 +106,7 @@ void manager::quit_app(string&& append_message)
 
 void manager::quit_app(const_chrs append_message)
 {
-    this->quit_app(helper_string::make(append_message));
+	this->quit_app(helper_string::make(append_message ? append_message : LOGGER_STR("")));
 }
 
 //void manager::quit_app_to_exception(const smart_exception& exception, string&& append_message)
@@ -117,7 +117,7 @@ void manager::quit_app(const_chrs append_message)
 //
 //void manager::quit_app_to_exception(const smart_exception& exception, const_chrs append_message)
 //{
-//    this->quit_app_to_exception(exception, helper_string::make(append_message));
+//    this->quit_app_to_exception(exception, helper_string::make(append_message ? append_message : LOGGER_STR("")));
 //}
 
 node manager::make_node(string_list&& full_key)

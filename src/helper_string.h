@@ -49,6 +49,7 @@ std::size_t accumulate_hash(const string& str);
 }} // namespace logger::helper_string
 
 
+#if defined(LOGGER_QT_STRING)
 namespace std
 {
 
@@ -65,6 +66,7 @@ struct hash<logger::string>
 
 
 } // namespace std
+#endif
 
 
 #endif // LOGGER_HELPER_STRING_H

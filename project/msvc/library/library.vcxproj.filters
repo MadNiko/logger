@@ -1,84 +1,86 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
+    <Filter Include="1. Public headers files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="2. Private headers files">
+      <UniqueIdentifier>{21bb49b2-574a-40e9-84ae-461f76f55b4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. Source files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="1. Public headers files\def_target">
+      <UniqueIdentifier>{766f2d27-7261-4ce3-aab8-013f8400df63}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\src\helper_data.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\helper_string.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\node_data.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="$(LoggerIncludeDir)logger\constants.h">
-      <Filter>Header Files</Filter>
+      <Filter>1. Public headers files</Filter>
     </ClInclude>
     <ClInclude Include="$(LoggerIncludeDir)logger\defines.h">
-      <Filter>Header Files</Filter>
+      <Filter>1. Public headers files</Filter>
     </ClInclude>
     <ClInclude Include="$(LoggerIncludeDir)logger\function_visiter.h">
-      <Filter>Header Files</Filter>
+      <Filter>1. Public headers files</Filter>
     </ClInclude>
     <ClInclude Include="$(LoggerIncludeDir)logger\helper.h">
-      <Filter>Header Files</Filter>
+      <Filter>1. Public headers files</Filter>
     </ClInclude>
     <ClInclude Include="$(LoggerIncludeDir)logger\manager.h">
-      <Filter>Header Files</Filter>
+      <Filter>1. Public headers files</Filter>
     </ClInclude>
     <ClInclude Include="$(LoggerIncludeDir)logger\node.h">
-      <Filter>Header Files</Filter>
+      <Filter>1. Public headers files</Filter>
     </ClInclude>
     <ClInclude Include="$(LoggerIncludeDir)logger\string.h">
-      <Filter>Header Files</Filter>
+      <Filter>1. Public headers files</Filter>
     </ClInclude>
     <ClInclude Include="$(LoggerIncludeDir)logger\target.h">
-      <Filter>Header Files</Filter>
+      <Filter>1. Public headers files</Filter>
     </ClInclude>
     <ClInclude Include="$(LoggerIncludeDir)logger\types.h">
-      <Filter>Header Files</Filter>
+      <Filter>1. Public headers files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\helper_data.h">
+      <Filter>2. Private headers files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\helper_string.h">
+      <Filter>2. Private headers files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\src\node_data.h">
+      <Filter>2. Private headers files</Filter>
     </ClInclude>
     <ClInclude Include="$(LoggerIncludeDir)logger\def_target\ostream.h">
-      <Filter>Header Files</Filter>
+      <Filter>1. Public headers files\def_target</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\src\function_visiter.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>3. Source files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\helper.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>3. Source files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\helper_data.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>3. Source files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\helper_string_qt.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>3. Source files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\helper_string_stl.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>3. Source files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\manager.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>3. Source files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\node.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>3. Source files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\src\ostream.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>3. Source files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

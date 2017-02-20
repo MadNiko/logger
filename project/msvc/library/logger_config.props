@@ -2,16 +2,32 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
+    <LoadedProps_LoggerConfig>True</LoadedProps_LoggerConfig>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" Label="UserMacros">
+    <LoggerTargetNameSuffix>d</LoggerTargetNameSuffix>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" Label="UserMacros">
+    <LoggerTargetNameSuffix>
+    </LoggerTargetNameSuffix>
+  </PropertyGroup>
+  <PropertyGroup Label="UserMacros">
+    <LoggerName>logger</LoggerName>
     <LoggerIncludeDir>$(LoggerProjectDir)..\..\..\include\</LoggerIncludeDir>
-    <LoggerLibDir>$(LoggerProjectDir)..\..\..\lib\</LoggerLibDir>
-    <LoggerBinDir>$(LoggerProjectDir)..\..\..\bin\</LoggerBinDir>
-    <LoggerTargetName>logger</LoggerTargetName>
+    <LoggerOutputDir>$(LoggerProjectDir)..\..\..\..\$(SolutionName)-output-$(Configuration)-$(Platform)\</LoggerOutputDir>
+    <LoggerLibDir>$(LoggerOutputDir)lib\</LoggerLibDir>
+    <LoggerBinDir>$(LoggerOutputDir)bin\</LoggerBinDir>
+    <LoggerBuildDir>$(LoggerOutputDir)build\</LoggerBuildDir>
+    <LoggerTargetName>$(LoggerName)$(LoggerTargetNameSuffix)</LoggerTargetName>
+    <LoggerConfigurationType>DynamicLibrary</LoggerConfigurationType>
+    <!-- StaticLibrary | DynamicLibrary -->
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <PreprocessorDefinitions>LOGGER_STL_STRING;LOGGER_CHAR__CHAR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>LOGGER_STL_STRING;LOGGER_CHAR__WIDE_CHAR;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup />
+  <Import Project="$(SolutionDir)\logger_custom_config.props" Condition="exists('$(SolutionDir)\logger_custom_config.props')" Label="LocalAppDataPlatform" />
 </Project>

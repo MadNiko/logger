@@ -27,7 +27,7 @@ namespace logger
 
 
 #if defined(LOGGER_CHAR__CHAR)
-    using  chr = char;
+    using chr = char;
 #elif defined(LOGGER_CHAR__WIDE_CHAR)
     using chr = wchar_t;
 #endif

@@ -96,11 +96,13 @@
 
 //
 #if defined(LOGGER_CHAR__CHAR)
-#   define LOGGER_STR(text) (text)
-#   define LOGGER_CHAR(ch)  (ch)
+#   define LOGGER_STR(text) text
+#   define LOGGER_CHAR(ch)  ch
 #else // defined(LOGGER_CHAR__WIDE_CHAR)
-#   define LOGGER_STR(text) (L##text)
-#   define LOGGER_CHAR(ch)  (L##ch)
+#   define LOGGER_STR2(text) L ## text
+#   define LOGGER_STR(text)  LOGGER_STR2(text)
+#   define LOGGER_CHAR2(ch)  L ## ch
+#   define LOGGER_CHAR(ch)   LOGGER_CHAR2(ch)
 #endif
 
 

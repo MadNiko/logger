@@ -3,6 +3,7 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
     <LoggerProjectDir>$(ProjectDir)..\library\</LoggerProjectDir>
+    <SolutionOutputDir>$(SolutionDir)..\..\..\$(SolutionName)-output-$(Configuration)-$(Platform)\</SolutionOutputDir>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup>
@@ -12,3 +13,4 @@
   </ItemDefinitionGroup>
   <ItemGroup />
 </Project>
+
